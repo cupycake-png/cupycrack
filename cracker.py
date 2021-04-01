@@ -13,7 +13,7 @@ from hashlib import md5, sha1, sha256, sha384, sha512
 
 # list of algorithms possible for use
 ALGORITHM_LIST = ['md5', 'sha1', 'sha256', 'sha384', 'sha512']
-METHOD_DIC = {0 : 'Brute Force', 1 : 'Wordlist'}
+METHOD_DIC = {0 : 'Brute Force', 1 : 'Wordlist', 2: 'Online Lookup'}
 
 # parse arguments, returns a tuple
 def parse_args() -> tuple:
