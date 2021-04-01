@@ -16,4 +16,10 @@ Usage output example:
 
 ![Example of usage output](https://github.com/cupycake-png/cupycrack/blob/main/output_example.png)
 
+Online lookup addition:
+
+
+![Example of online lookup addition](https://github.com/cupycake-png/cupycrack/blob/main/lookup_example.png)
+
+
 Enjoy! ^^
