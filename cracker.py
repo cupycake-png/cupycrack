@@ -4,13 +4,15 @@ from argparse import ArgumentParser
 from string import printable
 # used to iterate over all possibilities
 from itertools import product
+# allow for online lookup for hashes
+from requests import get
 # use this to time the cracking
 from time import time
 # import hash functionality
-from hashlib import md5, sha1, sha256
+from hashlib import md5, sha1, sha256, sha384, sha512
 
 # list of algorithms possible for use
-ALGORITHM_LIST = ['md5', 'sha1', 'sha256']
+ALGORITHM_LIST = ['md5', 'sha1', 'sha256', 'sha384', 'sha512']
 METHOD_DIC = {0 : 'Brute Force', 1 : 'Wordlist'}
 
 # parse arguments, returns a tuple
@@ -44,6 +46,22 @@ def start_cracking(algorithm, method, target):
     pass_len = 1
     # counter used to know how many tries have gone passed
     counter = 0
+
+    # attempt online lookup for hash
+    url = "https://md5decrypt.net/Api/api.php?hash={}&hash_type={}&email=deanna_abshire@proxymail.eu&code=1152464b80a61728".format(target, algorithm)
+    # get the results from the get request
+    results = get(url).text
+
+    # if there are any results
+    if(results):
+        # display them then exit
+        print("[+] Found hash online: {}".format(results))
+        exit()
+
+    # if there aren't any results
+    else:
+        # display information then carry on with cracking
+        print("[-] Unable to find hash online")
 
     # if the brute force method was selected
     if(method == 0):
@@ -80,6 +98,24 @@ def start_cracking(algorithm, method, target):
                     elif(algorithm == "sha256"):
                         # compare the hash of the current guess and the target hash
                         if(sha256(output_string.encode()).hexdigest() == target):
+                            # we've cracked it
+                            isCracked = True;
+                            # break out the loop
+                            break;
+
+                    # if sha384 algorithm was selected
+                    elif(algorithm == "sha384"):
+                        # compare the hash of the current guess and the target hash
+                        if(sha384(output_string.encode()).hexdigest() == target):
+                            # we've cracked it
+                            isCracked = True;
+                            # break out the loop
+                            break;
+
+                    # if sha512 algorithm was selected
+                    elif(algorithm == "sha512"):
+                        # compare the hash of the current guess and the target hash
+                        if(sha512(output_string.encode()).hexdigest() == target):
                             # we've cracked it
                             isCracked = True;
                             # break out the loop
@@ -152,6 +188,24 @@ def start_cracking(algorithm, method, target):
                 elif(algorithm == "sha256"):
                     # compare the hash of the current guess and the target hash
                     if(sha256(output_string.encode()).hexdigest() == target):
+                        # we've cracked it
+                        isCracked = True;
+                        # break out the loop
+                        break;
+
+                # if sha384 algorithm was selected
+                elif(algorithm == "sha384"):
+                    # compare the hash of the current guess and the target hash
+                    if(sha384(output_string.encode()).hexdigest() == target):
+                        # we've cracked it
+                        isCracked = True;
+                        # break out the loop
+                        break;
+
+                # if sha512 algorithm was selected
+                elif(algorithm == "sha512"):
+                    # compare the hash of the current guess and the target hash
+                    if(sha512(output_string.encode()).hexdigest() == target):
                         # we've cracked it
                         isCracked = True;
                         # break out the loop
