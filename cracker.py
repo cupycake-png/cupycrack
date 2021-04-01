@@ -22,7 +22,7 @@ def parse_args() -> tuple:
 
     # add all arguments needed: algorithms, methods and target
     arg_parser.add_argument('-a', '--algorithm', metavar='algorithm', choices=ALGORITHM_LIST, action="store", type=str, help="Algorithm to use for cracking ({})".format(ALGORITHM_LIST), required=True)
-    arg_parser.add_argument('-m', '--method', metavar='method', choices=[0, 1], action="store", type=int, help="Method to use (0 - Brute Force, 1 - Wordlist)", required=True)
+    arg_parser.add_argument('-m', '--method', metavar='method', choices=[0, 1, 2], action="store", type=int, help="Method to use (0 - Brute Force, 1 - Wordlist), 2 - Only Online Lookup", required=True)
     arg_parser.add_argument('-t', '--target', metavar='target', action="store", type=str, help="Hash to crack", required=True)
 
     # get the arguments
@@ -62,6 +62,10 @@ def start_cracking(algorithm, method, target):
     else:
         # display information then carry on with cracking
         print("[-] Unable to find hash online")
+
+        # if only wanted online lookup, exit
+        if(method == 3):
+            exit()
 
     # if the brute force method was selected
     if(method == 0):
