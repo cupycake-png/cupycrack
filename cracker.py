@@ -64,7 +64,7 @@ def start_cracking(algorithm, method, target):
         print("[-] Unable to find hash online")
 
         # if only wanted online lookup, exit
-        if(method == 3):
+        if(method == 2):
             exit()
 
     # if the brute force method was selected
@@ -148,7 +148,7 @@ def start_cracking(algorithm, method, target):
         exit()
 
     # method being wordlist
-    else:
+    elif(method == 1):
         # get the filename
         filename = str(input("[?] File to use for wordlist >> "))
 
