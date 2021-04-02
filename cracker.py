@@ -249,6 +249,7 @@ algorithm, method, target = parse_args()
 
 # display information
 print("[!] Hash cracking tool! [!]", end="\n\n")
+print("[#] Written by cupycake-png ^^ [#]")
 
 # display based on method choice
 print("[+] Algorithm: {}\n[+] Method: {}\n[+] Target: {}\n".format(algorithm, METHOD_DIC[method], target))
